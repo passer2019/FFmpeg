@@ -3070,7 +3070,7 @@ static int try_decode_frame(AVFormatContext *s, AVStream *st, AVPacket *avpkt,
 
         /* Force thread count to 1 since the H.264 decoder will not extract
          * SPS and PPS to extradata during multi-threaded decoding. */
-        av_dict_set(options ? options : &thread_opt, "threads", "8", 0);
+        av_dict_set(options ? options : &thread_opt, "threads", "16", 0);
         if (s->codec_whitelist)
             av_dict_set(options ? options : &thread_opt, "codec_whitelist", s->codec_whitelist, 0);
         ret = avcodec_open2(avctx, codec, options ? options : &thread_opt);
@@ -3739,7 +3739,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
 
         /* Force thread count to 1 since the H.264 decoder will not extract
          * SPS and PPS to extradata during multi-threaded decoding. */
-        av_dict_set(options ? &options[i] : &thread_opt, "threads", "1", 0);
+        av_dict_set(options ? &options[i] : &thread_opt, "threads", "16", 0);
 
         if (ic->codec_whitelist)
             av_dict_set(options ? &options[i] : &thread_opt, "codec_whitelist", ic->codec_whitelist, 0);
