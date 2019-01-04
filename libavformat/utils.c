@@ -4005,7 +4005,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
             av_packet_unref(pkt);
 
         st->codec_info_nb_frames++;
-		if(count > 200) {
+		if(count > 20) {
 			break;
 		}
         count++;
