@@ -1109,6 +1109,7 @@ static int h264_init_ps(H264Context *h, const H264SliceContext *sl, int first_sl
             return ret;
         h->avctx->pix_fmt = ret;
 
+
         av_log(h->avctx, AV_LOG_VERBOSE, "Reinit context to %dx%d, "
                "pix_fmt: %s\n", h->width, h->height, av_get_pix_fmt_name(h->avctx->pix_fmt));
 
@@ -1117,6 +1118,17 @@ static int h264_init_ps(H264Context *h, const H264SliceContext *sl, int first_sl
                    "h264_slice_header_init() failed\n");
             return ret;
         }
+		double tb = av_q2d(h->avctx->time_base);
+		if(tb < 20.0 || tb > 30.0) {
+			h->avctx->time_base.num = 25;
+			h->avctx->time_base.den = 1;
+		}
+		double fr = av_q2d(h->avctx->framerate);
+		if(fr < 20.0 || fr > 30.0) {
+			h->avctx->framerate.num = 25;
+			h->avctx->framerate.den = 1;
+		}
+		
     }
 
     return 0;
